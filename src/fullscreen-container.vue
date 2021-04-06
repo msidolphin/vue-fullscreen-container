@@ -15,7 +15,7 @@ export default /*#__PURE__*/ {
     }
   },
   methods: {
-    async init () {
+    init () {
       await this.initWindow(false)
       this.bindResizeEvent()
       this.dom.style.cssText = `width:${screen.width}px;height:${screen.height}px`
