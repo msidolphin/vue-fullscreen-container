@@ -22,7 +22,7 @@ export default /*#__PURE__*/ {
       this.onResize()
       this.ready = true
     },
-    async initWindow(resize = true) {
+    initWindow(resize = true) {
       return new Promise(resolve => {
         this.$nextTick(() => {
           this.dom = this.$refs.container
