@@ -55,6 +55,6 @@ body {
 
 ## 示例
 
-![智慧工地出入口考勤大屏](https://gdjcywebdata001.oss-cn-shenzhen.aliyuncs.com/10b36fcc3f2d4f0c9e2e0dec66265640.png)
+![智慧工地出入口考勤大屏](https://github.com/msidolphin/vue-fullscreen-container/raw/master/screenshot/01.png)
 
-![项目级可视化大屏](https://gdjcywebdata001.oss-cn-shenzhen.aliyuncs.com/d54967033fb5474aa20601a86c019430.png)
+![项目级可视化大屏](https://github.com/msidolphin/vue-fullscreen-container/raw/master/screenshot/02.png)
