@@ -5,7 +5,7 @@
 公司业务中有大量的可视化大屏的需求，一般都是要求内容全屏展示，所以将这个组件从业务中抽离出来
 
 > 1、使用这个组件请保证body的默认margin已经设置为0，否则将会引起缩放比例的计算错误\
-2、如果没有专门适配移动端，但是又想要保证排版不会变乱，可以将viewport的width设置为一个固定值，可以是设计稿的宽度\
+2、如果没有专门适配移动端，但是又想要保证排版不会变乱，可以将viewport的width设置为一个固定值，可以是设计稿的宽度
 
 ## 安装
 
@@ -51,10 +51,3 @@ body {
 ## 配置
 
 * delay: 触发resize回调延迟执行的毫秒数，默认100
-
-
-## 示例
-
-![智慧工地出入口考勤大屏](https://github.com/msidolphin/vue-fullscreen-container/raw/master/screenshot/01.png)
-
-![项目级可视化大屏](https://github.com/msidolphin/vue-fullscreen-container/raw/master/screenshot/02.png)
