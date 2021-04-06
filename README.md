@@ -14,7 +14,7 @@ npm install vue-fullscreen-container -S
 ```
 
 ## 使用
-```
+```js
 
 import Vue from 'vue'
 
@@ -26,9 +26,8 @@ Vue.use(FullScreenContainer)
 
 ```
 
-```
+```vue
 <script>
-
 export default {
 }
 </script>
