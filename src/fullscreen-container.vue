@@ -15,12 +15,13 @@ export default /*#__PURE__*/ {
     }
   },
   methods: {
-    async init () {
-      await this.initWindow(false)
-      this.bindResizeEvent()
-      this.dom.style.cssText = `width:${screen.width}px;height:${screen.height}px`
-      this.onResize()
-      this.ready = true
+    init () {
+      this.initWindow(false).then(() => {
+        this.bindResizeEvent()
+        this.dom.style.cssText = `width:${screen.width}px;height:${screen.height}px`
+        this.onResize()
+        this.ready = true
+      })
     },
     initWindow(resize = true) {
       return new Promise(resolve => {
