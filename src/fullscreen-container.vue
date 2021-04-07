@@ -1,26 +1,33 @@
 <script>
-import { debounce, observerDom } from './util'
+import { debounce } from './util'
 export default /*#__PURE__*/ {
   name: 'FullscreenContainer',
   props: {
     delay: {
       type: Number,
       default: 100
+    },
+    width: {
+      type: Number,
+      default: 1920
+    },
+    height: {
+      type: Number,
+      default: 1080
     }
   },
   data() {
     return {
-      ref: 'container',
-      ready: false
+      scale: 1
     }
   },
   methods: {
     init () {
+      this.rate = this.width / this.height
       this.initWindow(false).then(() => {
         this.bindResizeEvent()
-        this.dom.style.cssText = `width:${screen.width}px;height:${screen.height}px`
+        this.dom.style.cssText = `width:${this.width}px;height:${this.height}px`
         this.onResize()
-        this.ready = true
       })
     },
     initWindow(resize = true) {
@@ -34,20 +41,34 @@ export default /*#__PURE__*/ {
     },
     bindResizeEvent() {
       this.debounceInitWindow = debounce(this.initWindow, this.delay)
-      this.resizeObserver = observerDom(this.dom, this.debounceInitWindow)
       window.addEventListener('resize', this.debounceInitWindow)
     },
     unbindResizeEvent () {
-      if (this.resizeObserver) {
-        this.resizeObserver.disconnect()
-        this.resizeObserver.takeRecords()
-        this.resizeObserver = null
-      }
       window.removeEventListener('resize', this.debounceInitWindow)
     },
     onResize () {
+      const currentHeight = document.body.clientHeight
       const currentWidth = document.body.clientWidth
-      this.dom.style.transform = `scale(${currentWidth / screen.width})`
+      const xScale = currentWidth / this.width
+      const yScale = currentHeight / this.height
+
+      let rate = currentWidth / currentHeight
+
+      if (rate > this.rate) {
+        this.dom.style.transform = `scale(${yScale})`
+        this.dom.style.transformOrigin = 'center top 0px'
+        this.dom.style.marginLeft = `-${(Math.abs(this.width - currentWidth)) / 2}px`
+        this.dom.style.marginTop = '0px'
+        this.scale = yScale
+      } else {
+        this.dom.style.transform = `scale(${xScale})`
+        this.dom.style.transformOrigin = 'left top'
+        this.dom.style.marginLeft = `0px`
+        const offsetTop = (currentHeight / 2) - ((this.height * xScale) / 2)
+        this.dom.style.marginTop = `${offsetTop}px`
+        this.scale = xScale
+      }
+
     },
   },
   mounted () {
@@ -61,18 +82,16 @@ export default /*#__PURE__*/ {
 
 <template>
   <div ref="container" class="v-fullscreen-container">
-    <template v-if="ready"><slot/></template>
+    <slot/>
   </div>
 </template>
 
 <style>
 .v-fullscreen-container {
   position: fixed;
-  top: 0px;
-  left: 0px;
-  right: 0px;
+  top: 0;
+  left: 0;
   overflow: hidden;
-  transform-origin: left top;
   z-index: 999;
 }
 </style>
