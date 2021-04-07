@@ -28,6 +28,9 @@ export default /*#__PURE__*/ {
         this.bindResizeEvent()
         this.dom.style.cssText = `width:${this.width}px;height:${this.height}px`
         this.onResize()
+        setTimeout(() => {
+          this.dom.style.transition = 'all 0.3s linear 0s'
+        }, 0)
       })
     },
     initWindow(resize = true) {
