@@ -59,8 +59,9 @@ export default /*#__PURE__*/ {
 
       if (rate > this.rate) {
         this.dom.style.transform = `scale(${yScale})`
-        this.dom.style.transformOrigin = 'center top 0px'
-        this.dom.style.marginLeft = `-${(Math.abs(this.width - currentWidth)) / 2}px`
+        this.dom.style.transformOrigin = 'left top'
+        const offsetLeft = (currentWidth / 2) - ((this.width * yScale) / 2)
+        this.dom.style.marginLeft = `${offsetLeft}px`
         this.dom.style.marginTop = '0px'
         this.scale = yScale
       } else {
@@ -85,7 +86,7 @@ export default /*#__PURE__*/ {
 
 <template>
   <div ref="container" class="v-fullscreen-container">
-    <slot/>
+    <template><slot/></template>
   </div>
 </template>
 
